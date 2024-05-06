@@ -7,7 +7,7 @@ let deck;
 let card1;
 let card2;
 
-// clear db and create new user before tests
+
 beforeAll(async () => {
     await db.sync({ force: true });
     deck = await Deck.create({
@@ -31,7 +31,10 @@ beforeAll(async () => {
     console.log(deck);
 });
 
-afterAll(async () => await db.sync({ force: true }));
+// clear db and create new user before tests 
+afterAll(async () => {
+  await db.close();
+});
 
 describe('Deck', () => {
   it('has name property', async () => {
